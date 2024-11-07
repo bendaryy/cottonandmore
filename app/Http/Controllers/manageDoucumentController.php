@@ -157,7 +157,7 @@ class manageDoucumentController extends Controller
         for ($i = 0; $i < count($request->quantity); $i++) {
             $Data = [
                 'description' => $request->invoiceDescription[$i],
-                'itemType' => 'GS1',
+                'itemType' => 'EGS',
                 'itemCode' => $request->itemCode[$i],
                 // "itemCode" => "10003834",
                 'unitType' => $request->unitType[$i],
@@ -336,7 +336,7 @@ class manageDoucumentController extends Controller
         for ($i = 0; $i < count($request->quantity); $i++) {
             $Data = [
                 'description' => $request->invoiceDescription[$i],
-                'itemType' => 'GS1',
+                'itemType' => 'EGS',
                 'itemCode' => $request->itemCode[$i],
                 // "itemCode" => "10003834",
                 'unitType' => $request->unitType[$i],
@@ -516,7 +516,7 @@ class manageDoucumentController extends Controller
         for ($i = 0; $i < count($request->quantity); $i++) {
             $Data = [
                 'description' => $request->invoiceDescription[$i],
-                'itemType' => 'GS1',
+                'itemType' => 'EGS',
                 'itemCode' => $request->itemCode[$i],
                 // "itemCode" => "10003834",
                 'unitType' => $request->unitType[$i],
@@ -698,7 +698,7 @@ class manageDoucumentController extends Controller
         for ($i = 0; $i < count($request->quantity); $i++) {
             $Data = [
                 'description' => $request->invoiceDescription[$i],
-                'itemType' => 'GS1',
+                'itemType' => 'EGS',
                 'itemCode' => $request->itemCode[$i],
                 // "itemCode" => "10003834",
                 'unitType' => $request->unitType[$i],
@@ -1026,25 +1026,26 @@ class manageDoucumentController extends Controller
     // this is for create page of invoice
     public function createInvoice()
     {
-        // $response = Http::asForm()->post("$this->url1/connect/token", [
-        //     'grant_type' => 'client_credentials',
-        //     'client_id' => auth()->user()->details->client_id,
-        //     'client_secret' => auth()->user()->details->client_secret,
-        //     'scope' => "InvoicingAPI",
-        // ]);
+        $response = Http::asForm()->post("$this->url1/connect/token", [
+            'grant_type' => 'client_credentials',
+            'client_id' => auth()->user()->details->client_id,
+            'client_secret' => auth()->user()->details->client_secret,
+            'scope' => "InvoicingAPI",
+        ]);
 
-        // $product = Http::withHeaders([
-        //     "Authorization" => 'Bearer ' . $response['access_token'],
-        //     "Content-Type" => "application/json",
-        // ])->get("$this->url2/api/v1.0/codetypes/requests/my?Active=true&Status=Approved&PS=1000");
+        $product = Http::withHeaders([
+            "Authorization" => 'Bearer ' . $response['access_token'],
+            "Content-Type" => "application/json",
+        ])->get("$this->url2/api/v1.0/codetypes/requests/my?Active=true&Status=Approved&PS=1000");
 
-        // $products = $product['result'];
+        // return $products;
+        $products = $product['result'];
         // $codes = DB::table('products')->where('status', 'Approved')->get();
         $ActivityCodes = DB::table('activity_code')->get();
         $unittypes = DB::table('unittypes')->get();
         $allCompanies = DB::table('companies2')->get();
         $taxTypes = DB::table('taxtypes')->get();
-        return view('invoices.createInvoice2', compact('allCompanies', 'ActivityCodes', 'taxTypes', 'unittypes'));
+        return view('invoices.createInvoice2', compact('allCompanies', 'ActivityCodes', 'taxTypes', 'unittypes', 'products'));
     }
 
     // this function for Fill  the customer information

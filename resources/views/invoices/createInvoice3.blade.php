@@ -146,7 +146,7 @@
 
 
 
-                 <div class="col-xl-10 invoice-address-client">
+                <div class="col-xl-10 invoice-address-client">
 
                     <div class="row">
 
@@ -292,12 +292,11 @@
                                     </div>
                                 </div>
 
-                                 <div class="col-4">
+                                <div class="col-4">
                                     <label class="form-label"> (اختيارى) الرقم المرجعى للشراء (purchasing order)</label>
                                     <div class="">
                                         <input type="text" id="purchaseOrderReference" class="form-control text-center"
-                                            name="purchaseOrderReference"
-                                            placeholder="الرقم المرجعى للشراء">
+                                            name="purchaseOrderReference" placeholder="الرقم المرجعى للشراء">
                                     </div>
                                 </div>
 
@@ -493,26 +492,27 @@
                                                     <select name="itemCode[]" id="itemCode"
                                                         class="form-control form-control-sm single-select">
 
-                                                        <option value="10000335"
+                                                        @foreach ($products as $product)
+                                                        <option value="{{ $product['itemCode'] }}"
                                                             style="font-size: 20px">
-                                                            المنتجات الصوفية القطنية
-
+                                                            {{ $product['parentCodeNameSecondaryLang'] }}
+                                                        </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
-                                                 <div class="mb-3 col-8" style="margin: auto">
-                                                            <label for="inputProductTitle" class="form-label">وحـــدة
-                                                                القيــاس</label>
-                                                            <select name="unitType[]" required
-                                                                class="form-control form-control-sm form-select single-select"
-                                                                required>
-                                                                <option value="EA">each</option>
-                                                                @foreach ($unittypes as $unit)
-                                                                <option value="{{ $unit->code}}"
-                                                                    style="font-size: 20px">
-                                                                    {{ $unit->desc_en }}
-                                                                    @endforeach
-                                                            </select>
-                                                        </div>
+                                                <div class="mb-3 col-8" style="margin: auto">
+                                                    <label for="inputProductTitle" class="form-label">وحـــدة
+                                                        القيــاس</label>
+                                                    <select name="unitType[]" required
+                                                        class="form-control form-control-sm form-select single-select"
+                                                        required>
+                                                        <option value="EA">each</option>
+                                                        @foreach ($unittypes as $unit)
+                                                        <option value="{{ $unit->code}}" style="font-size: 20px">
+                                                            {{ $unit->desc_en }}
+                                                            @endforeach
+                                                    </select>
+                                                </div>
                                                 <div class="mb-3">
                                                     <label for="inputProductDescription"
                                                         class="form-label">@lang("site.Line Decription")</label>
@@ -560,8 +560,8 @@
                                                 </div>
                                                 <div class=" row g-3">
                                                     <div class="col-md-6">
-                                                        <label for="inputProductTitle"
-                                                            class="form-label">الضريبة النسبية</label>
+                                                        <label for="inputProductTitle" class="form-label">الضريبة
+                                                            النسبية</label>
 
                                                         <select name="t1subtype[]" required id="t1subtype"
                                                             class="form-control form-control-sm single-select">
@@ -576,8 +576,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="lineTaxAdd"
-                                                            class="form-label">نسية الضريبة النسبية</label>
+                                                        <label for="lineTaxAdd" class="form-label">نسية الضريبة
+                                                            النسبية</label>
                                                         <input type="number" class="form-control" name="rate[]"
                                                             id="rate" class="form-control form-control-sm"
                                                             onkeyup="bigOne()" onmouseover="bigOne()">
@@ -600,7 +600,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="lineTaxT4" class="form-label">نسبة ضريبة المنبع</label>
+                                                        <label for="lineTaxT4" class="form-label">نسبة ضريبة
+                                                            المنبع</label>
                                                         <input type="number" class="form-control" value="0"
                                                             name="t4rate[]" id="t4rate" onkeyup="bigOne()"
                                                             onmouseover="bigOne()" placeholder="@lang(" site.Tax t4
@@ -736,15 +737,16 @@
                                 <div class="row g-3">
                                     <div class="col-md-12">
                                         <label for="findTotalt2Amount" class="form-label">إجمالى الضريبة النسبية بالجنيه
-                                            </label>
+                                        </label>
                                         <input type="number" class="form-control" step="any" name="totalt2Amount"
                                             onmouseover="bigOne()" onkeyup="bigOne()" readonly id="totalt2Amount">
                                     </div>
                                     <div class="col-md-12">
-                                        <label for="findTotalt2Amount" class="form-label">إجمالى الضريبة النسبية بالعملة الأجنبية
-                                            </label>
-                                        <input type="number" class="form-control" step="any"
-                                            onmouseover="bigOne()" onkeyup="bigOne()" readonly id="totalt2AmountDollar">
+                                        <label for="findTotalt2Amount" class="form-label">إجمالى الضريبة النسبية بالعملة
+                                            الأجنبية
+                                        </label>
+                                        <input type="number" class="form-control" step="any" onmouseover="bigOne()"
+                                            onkeyup="bigOne()" readonly id="totalt2AmountDollar">
                                     </div>
 
                                     <hr>
@@ -758,8 +760,8 @@
                                     <div class="col-md-12">
                                         <label for="findTotalt4Amount" class="form-label">إجمالى ضريبة
                                             المنبع بالعملة الأجنبية</label>
-                                        <input class="form-control" type="number" step="any"
-                                            onmouseover="bigOne()" onkeyup="bigOne()" readonly id="totalt4AmountDollar">
+                                        <input class="form-control" type="number" step="any" onmouseover="bigOne()"
+                                            onkeyup="bigOne()" readonly id="totalt4AmountDollar">
                                     </div>
                                     <hr>
                                     <div class="col-md-12">
@@ -768,9 +770,10 @@
                                             onmouseover="bigOne()" onkeyup="bigOne()" readonly id="totalDiscountAmount">
                                     </div>
                                     <div class="col-md-12">
-                                        <label for="totalDiscountAmountDollar" class="form-label">إجمالى الخصم بالعملة الأجنبية</label>
-                                        <input type="number" class="form-control"
-                                            onmouseover="bigOne()" onkeyup="bigOne()" readonly id="totalDiscountAmountDollar">
+                                        <label for="totalDiscountAmountDollar" class="form-label">إجمالى الخصم بالعملة
+                                            الأجنبية</label>
+                                        <input type="number" class="form-control" onmouseover="bigOne()"
+                                            onkeyup="bigOne()" readonly id="totalDiscountAmountDollar">
                                     </div>
                                     <hr>
                                     <div class="col-md-12">
@@ -779,9 +782,10 @@
                                             onmouseover="bigOne()" onkeyup="bigOne()" readonly id="TotalSalesAmount">
                                     </div>
                                     <div class="col-md-12">
-                                        <label for="netTotal" class="form-label">الإجمالى الصافى بالعملة الأجنبية</label>
-                                        <input type="number" class="form-control" step="any"
-                                            onmouseover="bigOne()" onkeyup="bigOne()" readonly id="TotalSalesAmountDollar">
+                                        <label for="netTotal" class="form-label">الإجمالى الصافى بالعملة
+                                            الأجنبية</label>
+                                        <input type="number" class="form-control" step="any" onmouseover="bigOne()"
+                                            onkeyup="bigOne()" readonly id="TotalSalesAmountDollar">
                                     </div>
                                     <hr>
                                     <div class="col-md-12">
@@ -793,8 +797,8 @@
                                     <div class="col-md-12">
                                         <label for="findTotalNetAmount" class="form-label">إجمالى المبلغ
                                             الكلى بالعملة الأجنبية</label>
-                                        <input type="number" step="any" class="form-control"
-                                            onmouseover="bigOne()" onkeyup="bigOne()" readonly id="TotalNetAmountDollar">
+                                        <input type="number" step="any" class="form-control" onmouseover="bigOne()"
+                                            onkeyup="bigOne()" readonly id="TotalNetAmountDollar">
                                     </div>
                                     <hr>
                                     <div class="col-md-12">
@@ -804,10 +808,10 @@
                                             id="totalItemsDiscountAmount">
                                     </div>
                                     <div class="col-md-12">
-                                        <label for="TotalDiscount" class="form-label">إجمالى خصم الأصناف بالعملة الأجنبية</label>
-                                        <input type="number" step="any"
-                                            class="form-control" onmouseover="bigOne()" onkeyup="bigOne()" readonly
-                                            id="totalItemsDiscountAmountDollar">
+                                        <label for="TotalDiscount" class="form-label">إجمالى خصم الأصناف بالعملة
+                                            الأجنبية</label>
+                                        <input type="number" step="any" class="form-control" onmouseover="bigOne()"
+                                            onkeyup="bigOne()" readonly id="totalItemsDiscountAmountDollar">
                                     </div>
 
                                     <hr>
@@ -860,7 +864,8 @@
                                             <div class="d-grid col-6">
                                                 <button type="submit" class="btn btn-primary" name="action"
                                                     class="col-6" value="test" id="sendNewInv"
-                                                    formaction="{{ route('storeInvoiceDollar') }}">إرسال الفاتورة</button>
+                                                    formaction="{{ route('storeInvoiceDollar') }}">إرسال
+                                                    الفاتورة</button>
                                                 <button disabled style="display: none" class="btn btn-primary"
                                                     id="disabledButton">جارى الإرسال...</button>
                                             </div>
@@ -907,10 +912,12 @@
                                 <label for="inputProductTitle"
                                     class="form-label">@lang("site.Line Item")</label>
                                 <select name="itemCode[]" id="itemCode" class="form-control form-control-sm single-select">
-
-                                <option value="10000335"
-                                    style="font-size: 20px">
-                            المنتجات الصوفية القطنية
+ @foreach ($products as $product)
+                                                                <option value="{{ $product['itemCode'] }}"
+                                                                    style="font-size: 20px">
+                                                                    {{ $product['parentCodeNameSecondaryLang'] }}
+                                                                </option>
+                                                                @endforeach
 
                                  </select>
                              </div>
@@ -1447,7 +1454,7 @@
 //       }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
- <script>
+    <script>
         $(document).ready(function(){
         $(document).on('change', '#receiverName',function(){
              var select = $(this).val();
