@@ -1085,9 +1085,13 @@ class manageDoucumentController extends Controller
         $product = Http::withHeaders([
             'Authorization' => 'Bearer ' . $response['access_token'],
             'Content-Type' => 'application/json',
-        ])->get("$this->url2/api/v1.0/codetypes/requests/my?Active=true&Status=Approved&PS=1000");
+        ])->get("$this->url2/api/v1.0/codetypes/requests/my?Active=true&Status=Approved&PS=100");
 
         $products = $product['result'];
+        // $productCount = count($products);
+
+        // return $productCount; //
+        // return $products;
         // $codes = DB::table('products')->where('status', 'Approved')->get();
         $ActivityCodes = DB::table('activity_code')->get();
         $allCompanies = DB::table('companies2')->get();

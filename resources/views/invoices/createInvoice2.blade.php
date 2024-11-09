@@ -472,7 +472,7 @@
                                                                 @foreach ($products as $product)
                                                                 <option value="{{ $product['itemCode'] }}"
                                                                     style="font-size: 20px">
-                                                                    {{ $product['parentCodeNameSecondaryLang'] }}
+                                                                    {{ $product['codeNameSecondaryLang'] }}
                                                                 </option>
                                                                 @endforeach
 
@@ -782,7 +782,7 @@
                                                                 @foreach ($products as $product)
                                                                 <option value="{{ $product['itemCode'] }}"
                                                                     style="font-size: 20px">
-                                                                    {{ $product['parentCodeNameSecondaryLang'] }}
+                                                                    {{ $product['codeNameSecondaryLang'] }}
                                                                 </option>
                                                                 @endforeach
                                                         </select>
